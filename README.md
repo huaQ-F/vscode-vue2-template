@@ -8,8 +8,8 @@ Source code from https://github.com/lanzhsh/vscode-vue-template , Autofill name
 
 ## Features
 
-Create Vue2/Html Page & Create Js/Python Page
-No file extension default is Vue2 for create Vue2/Html
+Create Vue2/Html Page & Create Js/Python Page  
+No file extension default is Vue2 for create Vue2/Html  
 No file extension default is Js for create Js/Python
 
 ## Instruction

@@ -51,7 +51,9 @@ function generatePage(componentName, fullPath, pageType) {
         let filePath = `${fullPath}.js`;
         if(className.match(/\.py$/)){
             tempaltePath = pythonTemplate;
-            filePath = `${fullPath}.py`;
+            filePath = `${fullPath}`;
+        }else if(className.match(/\.js$/)){
+            filePath = `${fullPath}`;
         }
         jsFileContent = fs.readFileSync(tempaltePath, { encoding: 'utf-8' });
         jsFile = path.resolve(filePath);
@@ -60,7 +62,9 @@ function generatePage(componentName, fullPath, pageType) {
         let fileName = `${fullPath}.vue`;
         if(className.match(/\.html$/)){
             tempaltePath = htmlTemplate;
-            fileName = `${fullPath}.html`;
+            fileName = `${fullPath}`;
+        }else if(className.match(/\.vue$/)){
+            fileName = `${fullPath}`;
         }
         jsFileContent = fs.readFileSync(tempaltePath, { encoding: 'utf-8' });
         jsFile = path.resolve(fileName);

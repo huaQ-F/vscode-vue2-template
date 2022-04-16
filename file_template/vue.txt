@@ -1,11 +1,12 @@
 <template>
-  <div class="className">
+  <div class="<--className-->">
   </div>
 </template>
 
 <script>
+import Test form 'Test'
 export default{
-  name:"ClassName",
+  name:"<--ClassName-->",
   props:{
 
   },

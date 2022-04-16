@@ -69,8 +69,8 @@ function generatePage(componentName, fullPath, pageType) {
         jsFileContent = fs.readFileSync(tempaltePath, { encoding: 'utf-8' });
         jsFile = path.resolve(fileName);
     }
-    let templateStr = jsFileContent.replace(/ClassName/g, className)
-    templateStr = templateStr.replace(/className/g, className.toLocaleLowerCase())
+    let templateStr = jsFileContent.replace(/\<--ClassName--\>/g, className)
+    templateStr = templateStr.replace(/\<--className--\>/g, className.toLocaleLowerCase())
 
     fs.writeFileSync(jsFile, templateStr);
 

@@ -45,32 +45,31 @@ function generatePage(componentName, fullPath, pageType) {
 
     let jsFile;
     let jsFileContent;
-
+    let tempaltePath;
+    let filePath;
     if (pageType === 'api') {
-        let tempaltePath = jsTemplate;
-        let filePath = `${fullPath}.js`;
+        tempaltePath = jsTemplate;
+        filePath = `${fullPath}.js`;
         if(className.match(/\.py$/)){
             tempaltePath = pythonTemplate;
-            filePath = `${fullPath}`;
-        }else if(className.match(/\.js$/)){
-            filePath = `${fullPath}`;
         }
-        jsFileContent = fs.readFileSync(tempaltePath, { encoding: 'utf-8' });
-        jsFile = path.resolve(filePath);
     } else if (pageType === 'page') {
-        let tempaltePath = vueTemplate;
-        let fileName = `${fullPath}.vue`;
+        tempaltePath = vueTemplate;
+        filePath = `${fullPath}.vue`;
         if(className.match(/\.html$/)){
             tempaltePath = htmlTemplate;
-            fileName = `${fullPath}`;
-        }else if(className.match(/\.vue$/)){
-            fileName = `${fullPath}`;
         }
-        jsFileContent = fs.readFileSync(tempaltePath, { encoding: 'utf-8' });
-        jsFile = path.resolve(fileName);
     }
-    let templateStr = jsFileContent.replace(/\<--ClassName--\>/g, className)
-    templateStr = templateStr.replace(/\<--className--\>/g, className.toLocaleLowerCase())
+    let replaceName = className;
+    const arr = className.match(/(.*)((\.vue)|(\.html)|(\.js)|(\.py))$/);
+    if(arr){
+        filePath = `${fullPath}`;
+        replaceName = arr[1]
+    }
+    jsFileContent = fs.readFileSync(tempaltePath, { encoding: 'utf-8' });
+    jsFile = path.resolve(filePath);
+    let templateStr = jsFileContent.replace(/\<--ClassName--\>/g, replaceName)
+    templateStr = templateStr.replace(/\<--className--\>/g, replaceName.toLocaleLowerCase())
 
     fs.writeFileSync(jsFile, templateStr);
 

@@ -34,8 +34,11 @@ function generatePage(componentName, fullPath, pageType) {
     // create folder
     // fs.mkdirSync(fullPath);
 
-    const apiTemplate = path.resolve(__dirname, './file_template/api.txt');
-    const pageTemplate = path.resolve(__dirname, './file_template/page.txt');
+    const vueTemplate = path.resolve(__dirname, './file_template/vue.txt');
+    const htmlTemplate = path.resolve(__dirname, './file_template/html.txt');
+    
+    const jsTemplate = path.resolve(__dirname, './file_template/js.txt');
+    const pythonTemplate = path.resolve(__dirname, './file_template/python.txt');
     // const sassTemplate = path.resolve(__dirname, './file_template/scss.scss');
     // const sassFile = path.resolve(`${fullPath}/index.scss`);
     // fs.writeFileSync(sassFile, fs.readFileSync(sassTemplate, { encoding: 'utf-8' }));
@@ -44,11 +47,29 @@ function generatePage(componentName, fullPath, pageType) {
     let jsFileContent;
 
     if (pageType === 'api') {
-        jsFileContent = fs.readFileSync(apiTemplate, { encoding: 'utf-8' });
-        jsFile = path.resolve(`${fullPath}.js`);
+        let path = "";
+        let fileName = "";
+        if(fullPath.match(/\.py$/)){
+            path = pythonTemplate;
+            fileName = `${fullPath}`
+        }else{
+            path = jsTemplate
+            fileName = `${fullPath}.js`
+        }
+        jsFileContent = fs.readFileSync(path, { encoding: 'utf-8' });
+        jsFile = path.resolve(fileName);
     } else if (pageType === 'page') {
-        jsFileContent = fs.readFileSync(pageTemplate, { encoding: 'utf-8' });
-        jsFile = path.resolve(`${fullPath}.vue`);
+        let path = "";
+        let fileName = "";
+        if(fullPath.match(/\.html$/)){
+            path = htmlTemplate;
+            fileName = `${fullPath}`
+        }else{
+            path = vueTemplate
+            fileName = `${fullPath}.vue`
+        }
+        jsFileContent = fs.readFileSync(path, { encoding: 'utf-8' });
+        jsFile = path.resolve(fileName);
     }
     let templateStr = jsFileContent.replace(/ClassName/g, className)
     templateStr = templateStr.replace(/className/g, className.toLocaleLowerCase())

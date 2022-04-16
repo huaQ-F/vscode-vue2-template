@@ -1,8 +1,8 @@
 {
-	"name": "vue2-template",
-	"displayName": "Vue2 Template",
-	"description": "generate code template for vue2 project",
-	"version": "0.0.2",
+	"name": "vue2-html-python-template",
+	"displayName": "Vue 2 Html Python Template",
+	"description": "generate code template for vue2 project,html,python",
+	"version": "0.1.2",
 	"publisher": "huaQ-F",
 	"repository": {
 		"type": "git",
@@ -24,11 +24,11 @@
 		"commands": [
 			{
 				"command": "extension.createPage",
-				"title": "Create Vue2 Page"
+				"title": "Create Vue2/Html Page"
 			},
 			{
 				"command": "extension.createApiPage",
-				"title": "Create Js Page"
+				"title": "Create Js/Python Page"
 			}
 		],
 		"menus": {

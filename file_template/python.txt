@@ -1,0 +1,29 @@
+import MySQLdb,threading
+
+class MySqlServer(object):
+    def __init__(self,info):
+        self.DB_URL=info.DB_URL
+        self.USER_NAME=info.USER_NAME
+        self.PASSWD=info.PASSWD
+        self.DB_NAME=info.DB_NAME
+
+
+    @staticmethod
+    def handle_client(db):
+        cursor = db.cursor()
+        cursor.execute("SELECT VERSION()")
+        data = cursor.fetchone()
+        print(f"Database version :{data}")
+        db.close()
+
+    def start(self):
+        while True:
+            db = MySQLdb.connect(self.DB_URL,self.USER_NAME,self.PASSWD,self.DB_NAME)
+            sub_thread = threading.Thread(target=self.handle_client, args=(db,))
+            sub_thread.setDaemon(True)
+            sub_thread.start()
+
+
+if __name__ == '__main__':
+    sql_server = MySqlServer({'DB_URL':'localhost','USER_NAME':'root','PASSWD':'1234','DB_NAME':'test'})
+    sql_server.start()

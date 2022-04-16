@@ -2,7 +2,7 @@
 	"name": "vue2-html-python-template",
 	"displayName": "Vue Py Template",
 	"description": "generate code template for vue2 project,html,python",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"publisher": "huaQ-F",
 	"repository": {
 		"type": "git",
@@ -56,8 +56,8 @@
 		"@types/mocha": "^2.2.42"
 	},
 	"__metadata": {
-		"id": "9654d333-7317-4fa7-81b9-f5a610d3d267",
-		"publisherId": "24aad3cb-3cef-481e-9a9d-d7864c236ab2",
-		"publisherDisplayName": "dabai"
+		"id": "717e932a-aff0-696d-80d5-6d91a12d97dd",
+		"publisherId": "huaQ-F",
+		"publisherDisplayName": "huaQ-F"
 	}
 }

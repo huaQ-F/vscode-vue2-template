@@ -69,8 +69,7 @@ function generatePage(componentName, fullPath, pageType) {
     jsFileContent = fs.readFileSync(tempaltePath, { encoding: 'utf-8' });
     jsFile = path.resolve(filePath);
     const str1 = replaceName.replace(/[\_\-]([A-Za-z])/g,(val1,val2) =>val2.toUpperCase())
-    const str2 = replaceName.replace(/[A-Z]/g,'-'+"$1").toLocaleLowerCase()
-
+    const str2 = str1.replace(/([A-Z])/g,'-'+"$1").toLocaleLowerCase().replace(/^\-/,'')
     let templateStr = jsFileContent.replace(/\<--ClassName--\>/g, str1.substring(0,1)+str1.substring(1))
     templateStr = templateStr.replace(/\<--className--\>/g, str2)
 

@@ -68,8 +68,11 @@ function generatePage(componentName, fullPath, pageType) {
     }
     jsFileContent = fs.readFileSync(tempaltePath, { encoding: 'utf-8' });
     jsFile = path.resolve(filePath);
-    let templateStr = jsFileContent.replace(/\<--ClassName--\>/g, replaceName)
-    templateStr = templateStr.replace(/\<--className--\>/g, replaceName.toLocaleLowerCase())
+    const str1 = replaceName.replace(/[\_\-]([A-Za-z])/g,(val1,val2) =>val2.toUpperCase())
+    const str2 = replaceName.replace(/[A-Z]/g,'-'+"$1").toLocaleLowerCase()
+
+    let templateStr = jsFileContent.replace(/\<--ClassName--\>/g, str1.substring(0,1)+str1.substring(1))
+    templateStr = templateStr.replace(/\<--className--\>/g, str2)
 
     fs.writeFileSync(jsFile, templateStr);
 
@@ -82,6 +85,15 @@ function generatePage(componentName, fullPath, pageType) {
     });
 
    vscode.window.showInformationMessage('page created successfully!');
+   vscode.workspace.openTextDocument(jsFile)
+    .then(doc => {
+        // 在VSCode编辑窗口展示读取到的文本
+        vscode.window.showTextDocument(doc);
+    }, err => {
+        console.log(`Open ${jsFile} error, ${err}.`);
+    }).then(undefined, err => {
+        console.log(`Open ${jsFile} error, ${err}.`);
+    })
 }
 
 function activate(context) {

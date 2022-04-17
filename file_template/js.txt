@@ -4,7 +4,7 @@ import { postRequest, getRequest } from '../utils/request'
  *  demo
  * @param {}
  */
-export function <--className-->(params) {
+export function <--ClassName-->(params) {
   const url = `/dispense/application/form/list`
   return postRequest(url, params)
 }
